@@ -1,12 +1,10 @@
-from sqlalchemy import (
-    Column, ForeignKey, Integer, String,
-)
-from sqlalchemy.orm import (
-    declarative_base, relationship,
-)
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
+from manager import Base
 
-Base = declarative_base()
+STOP_SIGNAL = "."
+CODON_LENGTH = 3
 
 
 class DNABase(Base):
