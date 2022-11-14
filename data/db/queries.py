@@ -10,8 +10,9 @@ def dna_to_rna(nucleotide: str) -> str:
         return rna_base
 
 
-if __name__ == "__main__":
-    dna_to_rna("A")
-    dna_to_rna("C")
-    dna_to_rna("G")
-    dna_to_rna("T")
+def codon_to_aminoacid(codon: str) -> str:
+    with Session() as session:
+        aminoacid = session.query(Aminoacid.aminoacid).\
+            join(RNATriplet, RNATriplet.aminoacid_id == Aminoacid.id).\
+            filter(RNATriplet.triplet == codon).one().aminoacid
+        return aminoacid
