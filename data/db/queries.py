@@ -3,6 +3,7 @@ from data.db.manager import Session
 
 
 def dna_to_rna(nucleotide: str) -> str:
+    """Retrieve RNA base by given DNA base"""
     with Session() as session:
         rna_base = session.query(RNABase.base).\
             join(DNABase, DNABase.rna_id == RNABase.id).\
@@ -11,6 +12,7 @@ def dna_to_rna(nucleotide: str) -> str:
 
 
 def codon_to_aminoacid(codon: str) -> str:
+    """Retrieve aminoacid by given codon"""
     with Session() as session:
         aminoacid = session.query(Aminoacid.aminoacid).\
             join(RNATriplet, RNATriplet.aminoacid_id == Aminoacid.id).\

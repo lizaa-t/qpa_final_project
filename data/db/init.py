@@ -54,10 +54,12 @@ for aminoacid in aminoacid_to_codons.keys():
 
 
 def create_tables():
+    """Creates tables from models.py"""
     Base.metadata.create_all(engine)
 
 
 def fill_tables():
+    """Fills tables with data"""
     data = rna_bases + dna_bases + aminoacids + rna_triplets
     with Session() as session:
         for item in data:
@@ -66,9 +68,13 @@ def fill_tables():
 
 
 def init_tables():
+    """Creates and fills tables with data.
+    Runs only once for DB initialization
+    """
     create_tables()
     fill_tables()
 
 
 if __name__ == "__main__":
+    # run this script for DB initialization
     init_tables()
