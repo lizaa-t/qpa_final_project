@@ -1,5 +1,5 @@
-from models import Aminoacid, DNABase, RNABase, RNATriplet, STOP_SIGNAL
-from manager import Base, Session, engine
+from data.db.models import Aminoacid, DNABase, RNABase, RNATriplet, STOP_SIGNAL
+from data.db.manager import Base, Session, engine
 
 
 rna_bases = [

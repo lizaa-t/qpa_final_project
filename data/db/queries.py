@@ -1,5 +1,5 @@
-from models import Aminoacid, DNABase, RNABase, RNATriplet, STOP_SIGNAL
-from manager import Session
+from data.db.models import Aminoacid, DNABase, RNABase, RNATriplet
+from data.db.manager import Session
 
 
 def dna_to_rna(nucleotide: str) -> str:
