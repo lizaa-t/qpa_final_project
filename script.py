@@ -1,5 +1,4 @@
 from typing import Literal
-from math import ceil
 from collections import Counter
 
 import matplotlib.pyplot as plt
