@@ -1,3 +1,5 @@
+from collections import Counter
+
 from data.db.queries import dna_to_rna, codon_to_aminoacid
 from data.db.models import CODON_LENGTH
 
@@ -24,3 +26,16 @@ def convert_rna_to_protein(rna_sequence: str) -> str:
             protein += codon_to_aminoacid(codon)
 
     return protein
+
+
+def calculate_gc_ratio(dna_sequence: str, step: int = 100) -> list[float]:
+    """Calculates G-C content metric for DNA subsequences with a given step"""
+    gc_metric = []
+
+    for i in range(0, len(dna_sequence), step):
+        subsequence = dna_sequence[i:i+step]
+        base_frequency = Counter(subsequence)
+        gc_ratio = (base_frequency["G"] + base_frequency["C"]) / len(subsequence) * 100
+        gc_metric.append(gc_ratio)
+
+    return gc_metric
