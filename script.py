@@ -1,4 +1,8 @@
+from typing import Literal
+from math import ceil
 from collections import Counter
+
+import matplotlib.pyplot as plt
 
 from data.db.queries import dna_to_rna, codon_to_aminoacid
 from data.db.models import CODON_LENGTH
@@ -39,3 +43,17 @@ def calculate_gc_ratio(dna_sequence: str, step: int = 100) -> list[float]:
         gc_metric.append(gc_ratio)
 
     return gc_metric
+
+
+def plot_gc_ratio(gc_metric: list[float],
+                  step: int,
+                  file_format: Literal["png", "jpeg"] = "png",
+                  filename: str = "gc_ratio_plot") -> None:
+    """Plots graphic for G-C content metric and saves it as a file"""
+    x_values = [i + step for i in range(0, len(gc_metric)*step, step)]
+
+    figure, axis_x = plt.subplots()
+    axis_x.set(xlim=(0, x_values[-1]), xticks=x_values)
+    axis_x.stackplot(x_values, gc_metric)
+
+    plt.savefig(f"{filename}.{file_format}")
