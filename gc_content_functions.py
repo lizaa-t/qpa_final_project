@@ -1,3 +1,4 @@
+from os.path import join as os_path_join
 from typing import Literal
 from collections import Counter
 
@@ -28,4 +29,4 @@ def plot_gc_ratio(gc_metric: list[float],
     axis_x.set(xlim=(0, x_values[-1]), xticks=x_values)
     axis_x.stackplot(x_values, gc_metric)
 
-    plt.savefig(f"{filename}.{file_format}")
+    plt.savefig(os_path_join("pic", f"{filename}.{file_format}"))
