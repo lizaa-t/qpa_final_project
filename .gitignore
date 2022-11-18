@@ -130,3 +130,5 @@ dmypy.json
 
 # qpa_final_project
 pic/*
+app/my_test
+app/db/qpa_final_project.db
