@@ -32,4 +32,4 @@ def plot_gc_ratio(gc_metric: list[float],
                ylabel="GC-content, %",)
     axis_x.plot(x_values, gc_metric)
 
-    plt.savefig(os_path_join("pic", f"{filename}.{file_format}"))
+    plt.savefig(os_path_join("../pic", f"{filename}.{file_format}"))

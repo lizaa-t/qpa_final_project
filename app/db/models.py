@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from data.db.manager import Base
+from app.db.manager import Base
 
 STOP_SIGNAL = "."
 CODON_LENGTH = 3
