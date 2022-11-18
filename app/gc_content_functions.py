@@ -4,6 +4,8 @@ from collections import Counter
 
 import matplotlib.pyplot as plt
 
+import app.config as config
+
 
 def calculate_gc_ratio(dna_sequence: str, step: int = 100) -> list[float]:
     """Calculates G-C content metric for DNA subsequences with a given step"""
@@ -32,4 +34,4 @@ def plot_gc_ratio(gc_metric: list[float],
                ylabel="GC-content, %",)
     axis_x.plot(x_values, gc_metric)
 
-    plt.savefig(os_path_join("../pic", f"{filename}.{file_format}"))
+    plt.savefig(os_path_join(config.SAVE_DIR, f"{filename}.{file_format}"))
