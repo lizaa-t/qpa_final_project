@@ -1,5 +1,6 @@
-from app.db.models import Aminoacid, DNABase, RNABase, RNATriplet, STOP_SIGNAL
+from app.db.models import Aminoacid, DNABase, RNABase, RNATriplet
 from app.db.manager import Base, Session, engine
+from app.constants import TRANSLATION_STOP_SIGNAL
 
 
 rna_bases = [
@@ -37,7 +38,7 @@ aminoacid_to_codons = {
     "V": ["GUU", "GUC", "GUA", "GUG", ],
     "W": ["UGG", ],
     "Y": ["UAU", "UAC", ],
-    STOP_SIGNAL: ["UAA", "UAG", "UGA", ],
+    TRANSLATION_STOP_SIGNAL: ["UAA", "UAG", "UGA", ],
 }
 
 aminoacids = []

@@ -3,9 +3,6 @@ from sqlalchemy.orm import relationship
 
 from app.db.manager import Base
 
-STOP_SIGNAL = "."
-CODON_LENGTH = 3
-
 
 class DNABase(Base):
     __tablename__ = "dna_bases"

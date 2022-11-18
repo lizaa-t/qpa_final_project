@@ -1,5 +1,5 @@
 from app.db.queries import dna_to_rna, codon_to_aminoacid
-from app.db.models import CODON_LENGTH
+from app.constants import CODON_LENGTH
 
 
 def convert_dna_to_rna(dna_sequence: str) -> str:
