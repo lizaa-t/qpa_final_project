@@ -1,13 +1,8 @@
 from os.path import join as os_path_join
 from typing import Literal
-from math import ceil
 from collections import Counter
 
 import matplotlib.pyplot as plt
-
-
-MIN_GC = 0
-MAX_GC = 100
 
 
 def calculate_gc_ratio(dna_sequence: str, step: int = 100) -> list[float]:
@@ -31,15 +26,7 @@ def plot_gc_ratio(gc_metric: list[float],
     sequence_length = len(gc_metric) * step
     x_values = [x for x in range(0, sequence_length, step)]
 
-    ticks_count = 5
-    x_ticks = [tick for tick in range(0, sequence_length + 1, ceil(sequence_length / ticks_count))]
-    y_ticks = [tick for tick in range(MIN_GC, MAX_GC + 1, ceil(MAX_GC / ticks_count))]
-
     figure, axis_x = plt.subplots()
-    axis_x.set(xlim=(x_values[0], x_values[-1]),
-               xticks=x_ticks,
-               ylim=(MIN_GC, MAX_GC),
-               yticks=y_ticks)
     axis_x.plot(x_values, gc_metric)
 
     plt.savefig(os_path_join("pic", f"{filename}.{file_format}"))
