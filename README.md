@@ -4,11 +4,11 @@ This is a final project for Quantory Python School.
 
 ## Starting the app
 
-1. Initialize Environment Variable:<br>
+1. **Initialize Environment Variable:**<br>
 add `APP_DIR` environment variable with the path to the `app` folder on your machine, since other paths in config depend on it.
-2. Initialize Data Base:<br>
+2. **Initialize Data Base:**<br>
 separately run `app/db/init.py` script for initial db creation.
-3. Start the App:<br>
+3. **Start the App:**<br>
 use `app/main.py` as an entry point of the app.
 
 ## Project Structure
