@@ -26,5 +26,5 @@ use `app/main.py` as an entry point of the app.
 
 <br>
 
-> :warning: **Warning** <br>
+> **Warning** <br>
 > contributors @q-liza and @lizaa-t are the same person :)
