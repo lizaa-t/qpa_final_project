@@ -9,12 +9,12 @@ class DNABase(Base):
     __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True)
-    base = Column(String(1))
-    rna = relationship("RNABase", back_populates="dna")
-    rna_id = Column(Integer, ForeignKey("rna_bases.id"))
+    nucleobase = Column(String(1))
+    rna_base = relationship("RNABase", back_populates="dna_base")
+    rna_base_id = Column(Integer, ForeignKey("rna_bases.id"))
 
     def __str__(self):
-        return f"DNABase(id={self.id}, base={self.base})"
+        return f"DNABase(id={self.id}, base={self.nucleobase})"
 
 
 class RNABase(Base):
@@ -22,24 +22,24 @@ class RNABase(Base):
     __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True)
-    base = Column(String(1))
-    dna = relationship("DNABase", back_populates="rna")
+    nucleobase = Column(String(1))
+    dna_base = relationship("DNABase", back_populates="rna_base")
 
     def __str__(self):
-        return f"RNABase(id={self.id}, base={self.base})"
+        return f"RNABase(id={self.id}, base={self.nucleobase})"
 
 
-class RNATriplet(Base):
+class Codon(Base):
     __tablename__ = "rna_triplets"
     __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True)
-    triplet = Column(String(3))
-    aminoacid = relationship("Aminoacid", back_populates="rna_triplet")
+    trinucleotide = Column(String(3))
+    aminoacid = relationship("Aminoacid", back_populates="codon")
     aminoacid_id = Column(Integer, ForeignKey("aminoacids.id"))
 
     def __str__(self):
-        return f"RNATriplet(id={self.id}, triplet={self.triplet})"
+        return f"Codon(id={self.id}, triplet={self.trinucleotide})"
 
 
 class Aminoacid(Base):
@@ -47,8 +47,8 @@ class Aminoacid(Base):
     __table_args__ = {"extend_existing": True}
 
     id = Column(Integer, primary_key=True)
-    aminoacid = Column(String(1))
-    rna_triplet = relationship("RNATriplet", back_populates="aminoacid")
+    letter_code = Column(String(1))
+    codon = relationship("Codon", back_populates="aminoacid")
 
     def __str__(self):
-        return f"Aminoacid(id={self.id}, aminoacid={self.aminoacid})"
+        return f"Aminoacid(id={self.id}, aminoacid={self.letter_code})"
