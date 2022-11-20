@@ -1,7 +1,10 @@
+from functools import cache as functools_cache
+
 from app.db.models import Aminoacid, DNABase, RNABase, RNATriplet
 from app.db.manager import Session
 
 
+@functools_cache
 def dna_to_rna(nucleotide: str) -> str:
     """Retrieve RNA base by given DNA base"""
     with Session() as session:
@@ -11,6 +14,7 @@ def dna_to_rna(nucleotide: str) -> str:
         return rna_base
 
 
+@functools_cache
 def codon_to_aminoacid(codon: str) -> str:
     """Retrieve aminoacid by given codon"""
     with Session() as session:
