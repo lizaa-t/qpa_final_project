@@ -1,8 +1,12 @@
+from pydantic import validate_arguments
+
 from app.db.queries import get_rna_base, get_aminoacid
 from app.constants import CODON_LENGTH
+from app.constants import DNA_CONSTRAINT, RNA_CONSTRAINT
 
 
-def convert_dna_to_rna(dna_sequence: str) -> str:
+@validate_arguments
+def convert_dna_to_rna(dna_sequence: DNA_CONSTRAINT) -> str:
     """Converts DNA sequence into RNA"""
     rna_sequence = ""
     dna_sequence = dna_sequence.upper()
@@ -12,7 +16,8 @@ def convert_dna_to_rna(dna_sequence: str) -> str:
     return rna_sequence
 
 
-def convert_rna_to_protein(rna_sequence: str) -> str:
+@validate_arguments
+def convert_rna_to_protein(rna_sequence: RNA_CONSTRAINT) -> str:
     """Converts RNA sequence into protein"""
     polypeptide = ""
     rna_sequence = rna_sequence.upper()
