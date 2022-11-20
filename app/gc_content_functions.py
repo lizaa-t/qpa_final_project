@@ -7,32 +7,32 @@ import matplotlib.pyplot as plt
 import app.config as config
 
 
-def calculate_gc_ratio(dna_sequence: str, step: int = 100) -> list[float]:
+def calculate_gc_content(genomic_data: str, step: int = 100) -> list[float]:
     """Calculates G-C content metric for DNA subsequences with a given step"""
-    gc_metric = []
+    gc_per_fragment = []
 
-    for i in range(0, len(dna_sequence), step):
-        subsequence = dna_sequence[i:i+step]
-        base_frequency = Counter(subsequence)
-        gc_ratio = ((base_frequency["G"] + base_frequency["C"])
-                    / len(subsequence) * 100)
-        gc_metric.append(gc_ratio)
+    for i in range(0, len(genomic_data), step):
+        fragment = genomic_data[i:i+step]
+        bases_frequency = Counter(fragment)
+        gc_ratio = ((bases_frequency["G"] + bases_frequency["C"])
+                    / len(fragment) * 100)
+        gc_per_fragment.append(gc_ratio)
 
-    return gc_metric
+    return gc_per_fragment
 
 
-def plot_gc_ratio(gc_metric: list[float],
-                  step: int,
-                  file_format: Literal["png", "jpeg"] = "png",
-                  filename: str = "gc_ratio_plot") -> None:
+def plot_gc_content(gc_per_fragment: list[float],
+                    step: int,
+                    file_format: Literal["png", "jpeg"] = "png",
+                    filename: str = "gc_ratio_plot") -> None:
     """Plots graphic for G-C content metric and saves it as a file"""
-    sequence_length = len(gc_metric) * step
-    x_values = [x for x in range(0, sequence_length, step)]
+    sequence_length = len(gc_per_fragment) * step
+    fragment_start_position = [pos for pos in range(0, sequence_length, step)]
 
     figure, axis_x = plt.subplots()
-    axis_x.set(title="GC-content per sequence",
-               xlabel="Sequence start position",
-               ylabel="GC-content, %",)
-    axis_x.plot(x_values, gc_metric)
+    axis_x.set(title="GC-content (per fragment)",
+               xlabel="Fragment start position",
+               ylabel="GC-ratio, %",)
+    axis_x.plot(fragment_start_position, gc_per_fragment)
 
     plt.savefig(os_path_join(config.SAVE_DIR, f"{filename}.{file_format}"))
