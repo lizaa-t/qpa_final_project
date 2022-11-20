@@ -1,20 +1,20 @@
-from app.db.models import Aminoacid, DNABase, RNABase, RNATriplet
+from app.db.models import Aminoacid, DNABase, RNABase, Codon
 from app.db.manager import Base, Session, engine
 from app.constants import TRANSLATION_STOP_SIGNAL
 
 
 rna_bases = [
-    RNABase(base="A"),
-    RNABase(base="C"),
-    RNABase(base="G"),
-    RNABase(base="U"),
+    RNABase(nucleobase="A"),
+    RNABase(nucleobase="C"),
+    RNABase(nucleobase="G"),
+    RNABase(nucleobase="U"),
 ]
 
 dna_bases = [
-    DNABase(base="A", rna=rna_bases[0]),
-    DNABase(base="C", rna=rna_bases[1]),
-    DNABase(base="G", rna=rna_bases[2]),
-    DNABase(base="T", rna=rna_bases[3]),
+    DNABase(nucleobase="A", rna_base=rna_bases[0]),
+    DNABase(nucleobase="C", rna_base=rna_bases[1]),
+    DNABase(nucleobase="G", rna_base=rna_bases[2]),
+    DNABase(nucleobase="T", rna_base=rna_bases[3]),
 ]
 
 aminoacid_to_codons = {
@@ -42,16 +42,16 @@ aminoacid_to_codons = {
 }
 
 aminoacids = []
-rna_triplets = []
+codons = []
 
-for aminoacid in aminoacid_to_codons.keys():
-    amino = Aminoacid(aminoacid=aminoacid)
-    aminoacids.append(amino)
+for aminoacid_letter in aminoacid_to_codons.keys():
+    aminoacid = Aminoacid(letter_code=aminoacid_letter)
+    aminoacids.append(aminoacid)
 
-    codons = aminoacid_to_codons[aminoacid]
-    for codon in codons:
-        triplet = RNATriplet(triplet=codon, aminoacid=amino)
-        rna_triplets.append(triplet)
+    codon_triplets = aminoacid_to_codons[aminoacid_letter]
+    for triplet in codon_triplets:
+        codon = Codon(trinucleotide=triplet, aminoacid=aminoacid)
+        codons.append(codon)
 
 
 def create_tables():
@@ -61,7 +61,7 @@ def create_tables():
 
 def fill_tables():
     """Fills tables with data"""
-    data = rna_bases + dna_bases + aminoacids + rna_triplets
+    data = rna_bases + dna_bases + aminoacids + codons
     with Session() as session:
         for item in data:
             session.add(item)
