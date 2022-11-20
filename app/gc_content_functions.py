@@ -14,7 +14,8 @@ def calculate_gc_ratio(dna_sequence: str, step: int = 100) -> list[float]:
     for i in range(0, len(dna_sequence), step):
         subsequence = dna_sequence[i:i+step]
         base_frequency = Counter(subsequence)
-        gc_ratio = (base_frequency["G"] + base_frequency["C"]) / len(subsequence) * 100
+        gc_ratio = ((base_frequency["G"] + base_frequency["C"])
+                    / len(subsequence) * 100)
         gc_metric.append(gc_ratio)
 
     return gc_metric
