@@ -6,52 +6,60 @@ from app.gene_expression_functions_with_cache import convert_rna_to_protein as c
 
 
 if __name__ == '__main__':
-    start = time()
-    assert convert_dna_to_rna('ATTTGGCTACTAACAATCTA') == 'AUUUGGCUACUAACAAUCUA'
-    assert convert_dna_to_rna('GTTGTAATGGCCTACATTA') == 'GUUGUAAUGGCCUACAUUA'
-    assert convert_dna_to_rna('CAGGTGGTGTTGTTCAGTT') == 'CAGGUGGUGUUGUUCAGUU'
-    assert convert_dna_to_rna('GCTAACTAAC') == 'GCUAACUAAC'
-    assert convert_dna_to_rna('GCTAACTAACATCTTTGGCACTGTT') == 'GCUAACUAACAUCUUUGGCACUGUU'
-    assert convert_dna_to_rna('TATGAAAAACTCAAA') == 'UAUGAAAAACUCAAA'
-    assert convert_dna_to_rna('CCCGTCCTTGATTGGCTTGAAGAGAAGTTT') == 'CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU'
+    N = 10
+    cached_time = []
+    not_cached_time = []
 
-    assert convert_rna_to_protein('AUUUGGCUACUAACAAUCUA') == 'IWLLTI'
-    assert convert_rna_to_protein('GUUGUAAUGGCCUACAUUA') == 'VVMAYI'
-    assert convert_rna_to_protein('CAGGUGGUGUUGUUCAGUU') == 'QVVLFS'
-    assert convert_rna_to_protein('UAUGAAAAACUCAAA') == 'YEKLK'
-    assert convert_rna_to_protein('CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU') == 'PVLDWLEEKF'
-    assert convert_rna_to_protein('GCUAACUAAC') == 'AN.'
-    assert convert_rna_to_protein('GCUAACUAACAUCUUUGGCACUGUU') == 'AN.HLWHC'
-    end = time()
-    no_cache = end - start
+    for _ in range(N):
+        start = time()
+        assert convert_dna_to_rna('ATTTGGCTACTAACAATCTA') == 'AUUUGGCUACUAACAAUCUA'
+        assert convert_dna_to_rna('GTTGTAATGGCCTACATTA') == 'GUUGUAAUGGCCUACAUUA'
+        assert convert_dna_to_rna('CAGGTGGTGTTGTTCAGTT') == 'CAGGUGGUGUUGUUCAGUU'
+        assert convert_dna_to_rna('GCTAACTAAC') == 'GCUAACUAAC'
+        assert convert_dna_to_rna('GCTAACTAACATCTTTGGCACTGTT') == 'GCUAACUAACAUCUUUGGCACUGUU'
+        assert convert_dna_to_rna('TATGAAAAACTCAAA') == 'UAUGAAAAACUCAAA'
+        assert convert_dna_to_rna('CCCGTCCTTGATTGGCTTGAAGAGAAGTTT') == 'CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU'
 
-    start = time()
-    assert convert_dna_to_rna_cached('ATTTGGCTACTAACAATCTA') == 'AUUUGGCUACUAACAAUCUA'
-    assert convert_dna_to_rna_cached('GTTGTAATGGCCTACATTA') == 'GUUGUAAUGGCCUACAUUA'
-    assert convert_dna_to_rna_cached('CAGGTGGTGTTGTTCAGTT') == 'CAGGUGGUGUUGUUCAGUU'
-    assert convert_dna_to_rna_cached('GCTAACTAAC') == 'GCUAACUAAC'
-    assert convert_dna_to_rna_cached('GCTAACTAACATCTTTGGCACTGTT') == 'GCUAACUAACAUCUUUGGCACUGUU'
-    assert convert_dna_to_rna_cached('TATGAAAAACTCAAA') == 'UAUGAAAAACUCAAA'
-    assert convert_dna_to_rna_cached('CCCGTCCTTGATTGGCTTGAAGAGAAGTTT') == 'CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU'
+        assert convert_rna_to_protein('AUUUGGCUACUAACAAUCUA') == 'IWLLTI'
+        assert convert_rna_to_protein('GUUGUAAUGGCCUACAUUA') == 'VVMAYI'
+        assert convert_rna_to_protein('CAGGUGGUGUUGUUCAGUU') == 'QVVLFS'
+        assert convert_rna_to_protein('UAUGAAAAACUCAAA') == 'YEKLK'
+        assert convert_rna_to_protein('CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU') == 'PVLDWLEEKF'
+        assert convert_rna_to_protein('GCUAACUAAC') == 'AN.'
+        assert convert_rna_to_protein('GCUAACUAACAUCUUUGGCACUGUU') == 'AN.HLWHC'
+        end = time()
+        no_cache = end - start
 
-    assert convert_rna_to_protein_cached('AUUUGGCUACUAACAAUCUA') == 'IWLLTI'
-    assert convert_rna_to_protein_cached('GUUGUAAUGGCCUACAUUA') == 'VVMAYI'
-    assert convert_rna_to_protein_cached('CAGGUGGUGUUGUUCAGUU') == 'QVVLFS'
-    assert convert_rna_to_protein_cached('UAUGAAAAACUCAAA') == 'YEKLK'
-    assert convert_rna_to_protein_cached('CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU') == 'PVLDWLEEKF'
-    assert convert_rna_to_protein_cached('GCUAACUAAC') == 'AN.'
-    assert convert_rna_to_protein_cached('GCUAACUAACAUCUUUGGCACUGUU') == 'AN.HLWHC'
-    end = time()
-    cache = end - start
+        start = time()
+        assert convert_dna_to_rna_cached('ATTTGGCTACTAACAATCTA') == 'AUUUGGCUACUAACAAUCUA'
+        assert convert_dna_to_rna_cached('GTTGTAATGGCCTACATTA') == 'GUUGUAAUGGCCUACAUUA'
+        assert convert_dna_to_rna_cached('CAGGTGGTGTTGTTCAGTT') == 'CAGGUGGUGUUGUUCAGUU'
+        assert convert_dna_to_rna_cached('GCTAACTAAC') == 'GCUAACUAAC'
+        assert convert_dna_to_rna_cached('GCTAACTAACATCTTTGGCACTGTT') == 'GCUAACUAACAUCUUUGGCACUGUU'
+        assert convert_dna_to_rna_cached('TATGAAAAACTCAAA') == 'UAUGAAAAACUCAAA'
+        assert convert_dna_to_rna_cached('CCCGTCCTTGATTGGCTTGAAGAGAAGTTT') == 'CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU'
 
-    print(f"Cache: {cache}")
-    print(f"No cache: {no_cache}")
+        assert convert_rna_to_protein_cached('AUUUGGCUACUAACAAUCUA') == 'IWLLTI'
+        assert convert_rna_to_protein_cached('GUUGUAAUGGCCUACAUUA') == 'VVMAYI'
+        assert convert_rna_to_protein_cached('CAGGUGGUGUUGUUCAGUU') == 'QVVLFS'
+        assert convert_rna_to_protein_cached('UAUGAAAAACUCAAA') == 'YEKLK'
+        assert convert_rna_to_protein_cached('CCCGUCCUUGAUUGGCUUGAAGAGAAGUUU') == 'PVLDWLEEKF'
+        assert convert_rna_to_protein_cached('GCUAACUAAC') == 'AN.'
+        assert convert_rna_to_protein_cached('GCUAACUAACAUCUUUGGCACUGUU') == 'AN.HLWHC'
+        end = time()
+        cache = end - start
 
-    # Cache: 0.08845710754394531
-    # No cache: 0.45664429664611816
+        cached_time.append(cache)
+        not_cached_time.append(no_cache)
 
-    # Cache: 0.049990177154541016
-    # No cache: 0.2432999610900879
+    cached_time_avg = sum(cached_time) / N
+    not_cached_time_avg = sum(not_cached_time) / N
 
-    # Cache: 0.05466890335083008
-    # No cache: 0.21412992477416992
+    # N = 10
+    # Cache avg: 0.005142641067504883
+    # No cache avg: 0.24462802410125734
+    # N = 100
+    # Cache avg: 0.00033627986907958985
+    # No cache avg: 0.14937709093093873
+    print(f"Cache avg: {cached_time_avg}")
+    print(f"No cache avg: {not_cached_time_avg}")
