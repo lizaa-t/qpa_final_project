@@ -1,4 +1,4 @@
-from app.db.queries_with_cache import dna_to_rna, codon_to_aminoacid
+from app.db.queries_with_cache import get_rna_base, get_aminoacid
 from app.constants import CODON_LENGTH
 
 
@@ -7,19 +7,19 @@ def convert_dna_to_rna(dna_sequence: str) -> str:
     rna_sequence = ""
     dna_sequence = dna_sequence.upper()
     for nucleotide in dna_sequence:
-        rna_sequence += dna_to_rna(nucleotide)
+        rna_sequence += get_rna_base(nucleotide)
 
     return rna_sequence
 
 
 def convert_rna_to_protein(rna_sequence: str) -> str:
     """Converts RNA sequence into protein"""
-    protein = ""
+    polypeptide = ""
     rna_sequence = rna_sequence.upper()
 
     for i in range(0, len(rna_sequence), CODON_LENGTH):
         codon = rna_sequence[i:i+CODON_LENGTH]
         if len(codon) == CODON_LENGTH:
-            protein += codon_to_aminoacid(codon)
+            polypeptide += get_aminoacid(codon)
 
-    return protein
+    return polypeptide
