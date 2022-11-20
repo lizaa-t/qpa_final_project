@@ -14,12 +14,12 @@ def convert_dna_to_rna(dna_sequence: str) -> str:
 
 def convert_rna_to_protein(rna_sequence: str) -> str:
     """Converts RNA sequence into protein"""
-    protein = ""
+    polypeptide = ""
     rna_sequence = rna_sequence.upper()
 
     for i in range(0, len(rna_sequence), CODON_LENGTH):
         codon = rna_sequence[i:i+CODON_LENGTH]
         if len(codon) == CODON_LENGTH:
-            protein += codon_to_aminoacid(codon)
+            polypeptide += codon_to_aminoacid(codon)
 
-    return protein
+    return polypeptide
