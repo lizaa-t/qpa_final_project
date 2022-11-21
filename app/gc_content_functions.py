@@ -1,13 +1,17 @@
 from os.path import join as os_path_join
-from typing import Literal
+from typing import Literal, Union
 from collections import Counter
 
 import matplotlib.pyplot as plt
+from pydantic import validate_arguments
 
+from app.constants import DNA_CONSTRAINT, RNA_CONSTRAINT
 import app.config as config
 
 
-def calculate_gc_content(genomic_data: str, step: int = 100) -> list[float]:
+@validate_arguments
+def calculate_gc_content(genomic_data: Union[DNA_CONSTRAINT, RNA_CONSTRAINT],
+                         step: int = 100) -> list[float]:
     """Calculates G-C content metric for DNA subsequences with a given step"""
     gc_per_fragment = []
 
