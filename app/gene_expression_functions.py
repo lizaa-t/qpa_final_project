@@ -3,8 +3,10 @@ from pydantic import validate_arguments
 from app.db.queries import get_rna_base, get_aminoacid
 from app.constants import CODON_LENGTH
 from app.constants import DNA_CONSTRAINT, RNA_CONSTRAINT
+from app.utils import custom_exception
 
 
+@custom_exception
 @validate_arguments
 def convert_dna_to_rna(dna_sequence: DNA_CONSTRAINT) -> str:
     """Converts DNA sequence into RNA"""
@@ -16,6 +18,7 @@ def convert_dna_to_rna(dna_sequence: DNA_CONSTRAINT) -> str:
     return rna_sequence
 
 
+@custom_exception
 @validate_arguments
 def convert_rna_to_protein(rna_sequence: RNA_CONSTRAINT) -> str:
     """Converts RNA sequence into protein"""

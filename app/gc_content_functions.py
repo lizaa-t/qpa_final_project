@@ -7,8 +7,10 @@ from pydantic import validate_arguments
 
 from app.constants import DNA_CONSTRAINT, RNA_CONSTRAINT
 import app.config as config
+from app.utils import custom_exception
 
 
+@custom_exception
 @validate_arguments
 def calculate_gc_content(genomic_data: Union[DNA_CONSTRAINT, RNA_CONSTRAINT],
                          step: int = 100) -> list[float]:
