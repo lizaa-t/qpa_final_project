@@ -3,8 +3,13 @@ import os
 APP_DIR = os.getenv("APP_DIR")
 PROJECT_DIR = os.path.abspath(os.path.join(APP_DIR, os.pardir))
 
-SAVE_DIR_NAME = "pic"
-SAVE_DIR = os.path.join(PROJECT_DIR, SAVE_DIR_NAME)
+DATA_DIR_NAME = "data"
+
+PLOT_DIR_NAME = "pic"
+PLOT_DIR = os.path.join(PROJECT_DIR, DATA_DIR_NAME, PLOT_DIR_NAME)
+
+INPUT_DIR_NAME = "input"
+INPUT_DIR = os.path.join(PROJECT_DIR, DATA_DIR_NAME, INPUT_DIR_NAME)
 
 DB_DIALECT = "postgresql"
 DB_DRIVER = "pg8000"

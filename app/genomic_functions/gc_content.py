@@ -35,4 +35,4 @@ def plot_gc_content(gc_per_fragment: list[float],
                ylabel="GC-ratio, %",)
     axis_x.plot(fragment_start_position, gc_per_fragment)
 
-    plt.savefig(os_path_join(config.SAVE_DIR, f"{filename}.{file_format}"))
+    plt.savefig(os_path_join(config.PLOT_DIR, f"{filename}.{file_format}"))
