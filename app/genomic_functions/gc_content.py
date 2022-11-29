@@ -4,7 +4,7 @@ from collections import Counter
 
 import matplotlib.pyplot as plt
 
-import app.config as config
+from app.config import Config
 
 
 def calculate_gc_content(genomic_data: str, step: int = 100) -> list[float]:
@@ -35,4 +35,4 @@ def plot_gc_content(gc_per_fragment: list[float],
                ylabel="GC-ratio, %",)
     axis_x.plot(fragment_start_position, gc_per_fragment)
 
-    plt.savefig(os_path_join(config.PLOT_DIR, f"{filename}.{file_format}"))
+    plt.savefig(os_path_join(Config.PLOT_DIR, f"{filename}.{file_format}"))
