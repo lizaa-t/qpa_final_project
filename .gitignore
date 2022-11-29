@@ -129,6 +129,8 @@ dmypy.json
 .pyre/
 
 # qpa_final_project
-pic/*
+data/pic/*
+data/input/*
+data/db/*
 app/my_test
 app/db/qpa_final_project.db
