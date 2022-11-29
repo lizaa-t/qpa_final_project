@@ -1,5 +1,5 @@
 # your imports here, e.g.:
-from gene_expression_functions import convert_dna_to_rna
+from app.genomic_functions.gene_expression_functions import convert_dna_to_rna
 
 
 if __name__ == "__main__":
