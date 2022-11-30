@@ -6,8 +6,7 @@ ENV DB_USER qpa
 ENV DB_PASSWORD qpafinalproject
 ENV APP_DIR /usr/src/qpa_final_project/app/
 
-RUN mkdir -p /usr/src/qpa_final_project/app/
-RUN mkdir -p /usr/src/qpa_final_project/pic/
+RUN mkdir -p /usr/src/qpa_final_project/
 WORKDIR /usr/src/qpa_final_project/app/
 
 COPY . /usr/src/qpa_final_project/app/
@@ -18,5 +17,3 @@ RUN pip install --no-cache-dir -r requirements.txt
 ARG test_arg
 RUN echo "!!!!!!!  ATTENTION  !!!!!!!!!"
 RUN echo $test_arg
-
-CMD ["python", "main.py"]

@@ -1,15 +1,23 @@
 version: "3"
 
+volumes:
+  db_volume:
+
 services:
   app:
     build:
       context: ./app/
       args:
         test_arg: hello,world!
+    volumes:
+      - ./data/input/:/usr/src/qpa_final_project/data/input/
+      - ./data/pic/:/usr/src/qpa_final_project/data/pic/
     depends_on:
       - db
   db:
     image: postgres:14-alpine
+    volumes:
+      - db_volume:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=qpa
       - POSTGRES_PASSWORD=qpafinalproject
