@@ -6,4 +6,9 @@ from app.config import Config
 def read_file(filename):
     filepath = os_path_join(Config.INPUT_DIR, filename)
     with open(filepath, 'r') as file:
-        return file.read().replace("\n", "")
+        sequence = ""
+        for line in file:
+            if line.startswith(">") or line.startswith(";"):
+                continue
+            sequence += line.strip()
+        return sequence
