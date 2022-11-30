@@ -12,10 +12,14 @@ from app.genomic_functions.gc_content import plot_gc_content
 
 
 class TestGcCalculation(unittest.TestCase):
+    """Test Case for GC-content calculation functionality
+    from app.genomic_functions.gc_content.calculate_gc_content
+    """
     @parameterized.expand([
         ("ATTTGGCTACTAACAATCTA", 5, [20.0, 60.0, 20.0, 20.0], ),
     ])
     def test_calculation(self, sequence, step, expected):
+        """Tests whether calculated numbers are correct"""
         actual = calculate_gc_content(sequence, step)
         compare_floats = all(
             math_is_close(a, b)
@@ -24,12 +28,14 @@ class TestGcCalculation(unittest.TestCase):
         self.assertTrue(compare_floats, f"Should be {expected}. Got {actual}")
 
     def test_empty_sequence(self):
+        """Tests output for empty string"""
         sequence = ""
         expected = []
         actual = calculate_gc_content(sequence)
         self.assertEqual(actual, expected)
 
     def test_none_input(self):
+        """Tests output for None input"""
         sequence = None
         with self.assertRaises(Exception):
             calculate_gc_content(sequence)
@@ -38,7 +44,8 @@ class TestGcCalculation(unittest.TestCase):
         ("ATTTGGCTACTAACAATCTA", 5, 4, ),
         ("ATTTGGCTACTAACAATCTATT", 5, 5, ),
     ])
-    def test_input_bining(self, sequence, step, expected):
+    def test_input_binning(self, sequence, step, expected):
+        """Tests whether input data binning is correct"""
         actual = len(calculate_gc_content(sequence, step))
         self.assertEqual(actual,
                          expected,
@@ -52,6 +59,9 @@ TEMP_FILES_DIR = os.path.join(CURRENT_DIR, "temp_files")
 @patch("app.genomic_functions.gc_content.Config.PLOT_DIR",
        new=TEMP_FILES_DIR)
 class TestGcPlot(unittest.TestCase):
+    """Test Case for GC-content plotting functionality
+    from app.genomic_functions.gc_content.plot_gc_content
+    """
     @classmethod
     def setUpClass(cls):
         os.mkdir(TEMP_FILES_DIR)
@@ -61,6 +71,7 @@ class TestGcPlot(unittest.TestCase):
         shutil.rmtree(TEMP_FILES_DIR)
 
     def test_default_filename(self):
+        """Tests if file with default name is created"""
         default_filename = "gc_ratio_plot.png"
 
         calculated = [20.0, 60.0, 20.0, 20.0]
@@ -72,6 +83,7 @@ class TestGcPlot(unittest.TestCase):
         )
 
     def test_custom_filename(self):
+        """Tests if file with custom name is created"""
         custom_name = "plot"
         custom_format = "jpeg"
         custom_filename = f"{custom_name}.{custom_format}"
