@@ -67,15 +67,32 @@ docker compose down
 ## Project Structure
 - `app`: the app root directory
   - `db`: database related logic
-    - `init.py`: data and script for db creation, table creation and filling tables with data
+    - `__init__.py`
+    - `initialize_db.py`: data and script for db creation, table creation and filling tables with data
     - `manager.py`: main objects for db interaction
     - `models.py`: data models for tables
     - `queries.py`: data retrieving queries
-  - `gc_content_functions.py`: [gc-content metric](https://en.wikipedia.org/wiki/GC-content) related logic
-  - `gene_expression_functions.py`: [gene expression](https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/the-genetic-code) related logic
-  - `main.py`: example of app usage, app entry point
+  - `file_reader`: file reading related logic
+    - `__init__.py`
+  - `genomic_functions`: genomic domain related logic
+    - `__init__.py`
+    - `gc_content.py`: [gc-content metric](https://en.wikipedia.org/wiki/GC-content) related logic
+    - `gene_expression.py`: [gene expression](https://www.khanacademy.org/science/high-school-biology/hs-molecular-genetics/hs-rna-and-protein-synthesis/a/the-genetic-code) related logic
   - `config.py`: configuration file
-- `pic`: user saved plots as images
+  - `constants.py`: app constants
+  - `Dockerfile`: for app service container
+  - `main.py`: app entry point
+  - `requirements.txt`: dependencies
+- `data`: app data
+  - `input`: input files for `main.py` with genomic data
+    - `genomic.fna`: test file with covid-19 genomic data
+  - `logs`: app log files
+  - `pic`: user saved plots as images
+- `tests`: tests for the app business logic
+  - `gc_content_tests.py`: test for gc-content logic
+  - `gene_expression_tests.py`: test for gene_expression logic
+  - `mock_db.py`: db mocking for tests
+- `docker-compose.yaml`: docker compose file for app and db services
 
 <br>
 
