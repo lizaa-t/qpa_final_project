@@ -10,6 +10,7 @@ services:
     volumes:
       - ./data/input/:/usr/src/qpa_final_project/data/input/
       - ./data/pic/:/usr/src/qpa_final_project/data/pic/
+      - ./data/logs/:/usr/src/qpa_final_project/data/logs/
     depends_on:
       - db
   db:
