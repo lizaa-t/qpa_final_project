@@ -8,17 +8,24 @@ from app.file_reader import read_file
 
 
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("input", metavar="INPUT", type=str,
-                        help="the input DNA sequence; "
-                             "itself as a string or as a filename")
-arg_parser.add_argument("step", nargs="?", type=int, default=100,
-                        help="the step for gc-content calculating")
-arg_parser.add_argument("plot_filename", nargs="?", type=str,
-                        default="gc_ratio_plot",
-                        help="the filename of a gc-content plot")
-arg_parser.add_argument("--file", action="store_true",
-                        help="DNA sequence must be read from input file "
-                             "<input>")
+
+arg_parser.add_argument(
+    "input", metavar="INPUT", type=str,
+    help="the input DNA sequence: as a string itself or as a filename. "
+         "If filename is provided, must also provide '--file' option"
+)
+arg_parser.add_argument(
+    "--step", type=int, default=100,
+    help="the step for gc-content calculating (default: 100)"
+)
+arg_parser.add_argument(
+    "--plot_filename", type=str, default="gc_ratio_plot",
+    help="the filename of a gc-content plot (default: 'gc_ratio_plot')"
+)
+arg_parser.add_argument(
+    "--file", action="store_true",
+    help="specifies that DNA sequence must be read from <input> file"
+)
 
 
 if __name__ == "__main__":
