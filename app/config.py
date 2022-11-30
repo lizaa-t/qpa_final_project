@@ -13,6 +13,9 @@ class Config(object):
     INPUT_DIR_NAME = "input"
     INPUT_DIR = os.path.join(PROJECT_DIR, DATA_DIR_NAME, INPUT_DIR_NAME)
 
+    LOGS_DIR_NAME = "logs"
+    LOGS_DIR = os.path.join(PROJECT_DIR, DATA_DIR_NAME, LOGS_DIR_NAME)
+
     DB_DIALECT = "postgresql"
     DB_DRIVER = "pg8000"
     DB_USER = os.getenv("DB_USER")
