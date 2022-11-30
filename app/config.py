@@ -21,7 +21,6 @@ class Config(object):
     DB_USER = os.getenv("DB_USER")
     DB_PASSWORD = os.getenv("DB_PASSWORD")
     DB_HOST = "db"
-    # DB_HOST = "localhost"
     DB_PORT = "5432"
     DB_NAME = "genomic_db"
     DB_URI = (f"{DB_DIALECT}+{DB_DRIVER}://{DB_USER}:{DB_PASSWORD}@"
