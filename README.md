@@ -4,12 +4,65 @@ This is a final project for Quantory Python School.
 
 ## Starting the app
 
-1. **Initialize Environment Variable:**<br>
-add `APP_DIR` environment variable with the path to the `app` folder on your machine, since other paths in config depend on it.
-2. **Initialize Data Base:**<br>
-separately run `app/db/init.py` script for initial db creation.
-3. **Start the App:**<br>
-use `app/main.py` as an entry point of the app.
+1. Clone this repository:<br>
+```commandline
+git clone https://github.com/q-liza/qpa_final_project.git
+```
+2. Build images and run containers from project root folder:<br>
+```commandline
+docker compose up -d
+```
+> :information_source: there are docker volume for database and mounted directories for application data 
+> (e.g. logs, input and output files) in `docker-compose.yaml`
+
+> :information_source: logs and output files are preserved in mounted directories
+
+4. Initialize database (for the first run):<br>
+```commandline
+docker compose run --rm app python db/initialize_db.py
+```
+4. Start application:<br>
+```commandline
+docker compose run --rm app python main.py <args>
+```
+> :information_source: `app/main.py` is an entry point of the app
+
+> :information_source: `<args>` must be replaced with arguments for `main.py`
+<details>
+  <summary>main.py cli-usage</summary>
+
+  ```commandline
+  main.py [-h] [--step STEP] [--plot_filename PLOT_FILENAME] [--file] INPUT
+  ```
+  ```
+  positional arguments:
+    INPUT                 the input DNA sequence: as a string itself or as a
+                          filename. If filename is provided, must also provide '
+                          --file' option
+  
+  optional arguments:
+    -h, --help            show this help message and exit
+    --step STEP           the step for gc-content calculating (default: 100)
+    --plot_filename PLOT_FILENAME
+                          the filename of a gc-content plot (default:
+                          'gc_ratio_plot')
+    --file                specifies that DNA sequence must be read from <input>
+                          file
+  ```
+</details>
+
+<details>
+  <summary>example</summary>
+
+  ```commandline
+  docker compose run --rm app python main.py genomic.fna --plot_filename some_plot --file
+  ```
+</details>
+
+5. Stop application:<br>
+```commandline
+docker compose down
+```
 
 ## Project Structure
 - `app`: the app root directory
