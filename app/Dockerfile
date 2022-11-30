@@ -13,7 +13,3 @@ COPY . /usr/src/qpa_final_project/app/
 
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-
-ARG test_arg
-RUN echo "!!!!!!!  ATTENTION  !!!!!!!!!"
-RUN echo $test_arg
